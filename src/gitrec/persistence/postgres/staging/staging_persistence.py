@@ -1,6 +1,5 @@
 # src/gitrec/persistence/service.py
 
-
 from __future__ import annotations
 
 from src.gitrec.domain.entity.repository.repository_item import RepositoryItem
@@ -11,11 +10,11 @@ from src.gitrec.persistence.postgres.mapper.user import UserMapper
 from src.gitrec.persistence.postgres.validation.schema_validator import (
     SchemaValidator,
 )
-from src.gitrec.persistence.postgres.writer.repository_writer import RepositoryWriter
-from src.gitrec.persistence.postgres.writer.user_writer import UserWriter
+from src.gitrec.persistence.postgres.staging.staging_repository import RepositoryWriter
+from src.gitrec.persistence.postgres.staging.staging_user import UserWriter
 
 
-class PersistenceService:
+class StagingPersistence:
     """Coordinate mapping, validation, and transactional persistence."""
 
     def __init__(
@@ -26,7 +25,10 @@ class PersistenceService:
 
         self._repository_mapper = RepositoryMapper()
         self._user_mapper = UserMapper()
-        self._schema_validator = SchemaValidator(connection.engine)
+        self._schema_validator = SchemaValidator(
+            connection.engine,
+            schema_prefix="staging",
+        )
 
     def persist(
         self,

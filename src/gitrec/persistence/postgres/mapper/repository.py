@@ -34,67 +34,67 @@ class RepositoryMapper:
         self._validate_repositories(repositories)
 
         records: Records = {
-            "repositories": [],
-            "branches": [],
-            "commits": [],
-            "contributors": [],
-            "forks": [],
-            "issues": [],
-            "languages": [],
-            "pull_requests": [],
+            "repository": [],
+            "branch": [],
+            "commit": [],
+            "contributor": [],
+            "fork": [],
+            "issue": [],
+            "language": [],
+            "pull_request": [],
             "readme": [],
-            "releases": [],
-            "tags": [],
-            "topics": [],
+            "release": [],
+            "tag": [],
+            "topic": [],
         }
 
         for repository in repositories:
-            records["repositories"].append(
+            records["repository"].append(
                 self._map_repository(repository)
             )
 
-            records["branches"].extend(
-                self._map_branches(repository)
+            records["branch"].extend(
+                self._map_branch(repository)
             )
 
-            records["commits"].extend(
-                self._map_commits(repository)
+            records["commit"].extend(
+                self._map_commit(repository)
             )
 
-            records["contributors"].extend(
-                self._map_contributors(repository)
+            records["contributor"].extend(
+                self._map_contributor(repository)
             )
 
-            records["forks"].extend(
-                self._map_forks(repository)
+            records["fork"].extend(
+                self._map_fork(repository)
             )
 
-            records["issues"].extend(
-                self._map_issues(repository)
+            records["issue"].extend(
+                self._map_issue(repository)
             )
 
-            records["languages"].extend(
-                self._map_languages(repository)
+            records["language"].extend(
+                self._map_language(repository)
             )
 
-            records["pull_requests"].extend(
-                self._map_pull_requests(repository)
+            records["pull_request"].extend(
+                self._map_pull_request(repository)
             )
 
             records["readme"].extend(
                 self._map_readme(repository)
             )
 
-            records["releases"].extend(
-                self._map_releases(repository)
+            records["release"].extend(
+                self._map_release(repository)
             )
 
-            records["tags"].extend(
-                self._map_tags(repository)
+            records["tag"].extend(
+                self._map_tag(repository)
             )
 
-            records["topics"].extend(
-                self._map_topics(repository)
+            records["topic"].extend(
+                self._map_topic(repository)
             )
 
         return records
@@ -138,7 +138,7 @@ class RepositoryMapper:
         }
 
     @staticmethod
-    def _map_branches(repository: RepositoryItem) -> list[Record]:
+    def _map_branch(repository: RepositoryItem) -> list[Record]:
         """Map a repository's branches."""
         return [
             {
@@ -151,7 +151,7 @@ class RepositoryMapper:
         ]
 
     @staticmethod
-    def _map_commits(repository: RepositoryItem) -> list[Record]:
+    def _map_commit(repository: RepositoryItem) -> list[Record]:
         """Map a repository's commits."""
         return [
             {
@@ -170,7 +170,7 @@ class RepositoryMapper:
         ]
     
     @staticmethod
-    def _map_contributors(repository: RepositoryItem) -> list[Record]:
+    def _map_contributor(repository: RepositoryItem) -> list[Record]:
         """Map a repository's contributors."""
         return [
             {
@@ -184,7 +184,7 @@ class RepositoryMapper:
         ]
 
     @staticmethod
-    def _map_forks(repository: RepositoryItem) -> list[Record]:
+    def _map_fork(repository: RepositoryItem) -> list[Record]:
         """Map a repository's forks."""
         return [
             {
@@ -198,7 +198,7 @@ class RepositoryMapper:
         ]
 
     @staticmethod
-    def _map_issues(repository: RepositoryItem) -> list[Record]:
+    def _map_issue(repository: RepositoryItem) -> list[Record]:
         """Map a repository's issues."""
         return [
             {
@@ -220,7 +220,7 @@ class RepositoryMapper:
         ]
 
     @staticmethod
-    def _map_languages(repository: RepositoryItem) -> list[Record]:
+    def _map_language(repository: RepositoryItem) -> list[Record]:
         """Map a repository's languages."""
         return [
             {
@@ -231,7 +231,7 @@ class RepositoryMapper:
         ]
 
     @staticmethod
-    def _map_pull_requests(repository: RepositoryItem) -> list[Record]:
+    def _map_pull_request(repository: RepositoryItem) -> list[Record]:
         """Map a repository's pull requests."""
         return [
             {
@@ -267,7 +267,7 @@ class RepositoryMapper:
         ]
 
     @staticmethod
-    def _map_releases(repository: RepositoryItem) -> list[Record]:
+    def _map_release(repository: RepositoryItem) -> list[Record]:
         """Map a repository's releases."""
         return [
             {
@@ -288,7 +288,7 @@ class RepositoryMapper:
         ]
 
     @staticmethod
-    def _map_tags(repository: RepositoryItem) -> list[Record]:
+    def _map_tag(repository: RepositoryItem) -> list[Record]:
         """Map a repository's tags."""
         return [
             {
@@ -301,7 +301,7 @@ class RepositoryMapper:
         ]
 
     @staticmethod
-    def _map_topics(repository: RepositoryItem) -> list[Record]:
+    def _map_topic(repository: RepositoryItem) -> list[Record]:
         """Map a repository's topics."""
         return [
             {

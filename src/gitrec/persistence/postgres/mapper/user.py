@@ -43,57 +43,57 @@ class UserMapper:
         self._validate_users(users)
 
         records: Records = {
-            "users": [],
-            "events": [],
-            "followers": [],
+            "user": [],
+            "event": [],
+            "follower": [],
             "following": [],
-            "gists": [],
-            "organizations": [],
-            "profiles": [],
-            "received_events": [],
+            "gist": [],
+            "organization": [],
+            "profile": [],
+            "received_event": [],
             "starred": [],
-            "user_repositories": [],
+            "user_repository": [],
         }
 
         for user in users:
-            records["users"].append(
+            records["user"].append(
                 self._map_user(user)
             )
 
-            records["profiles"].extend(
+            records["profile"].extend(
                 self._map_profile(user)
             )
 
-            records["events"].extend(
-                self._map_events(user)
+            records["event"].extend(
+                self._map_event(user)
             )
 
-            records["followers"].extend(
-                self._map_followers(user)
+            records["follower"].extend(
+                self._map_follower(user)
             )
 
             records["following"].extend(
                 self._map_following(user)
             )
 
-            records["gists"].extend(
-                self._map_gists(user)
+            records["gist"].extend(
+                self._map_gist(user)
             )
 
-            records["organizations"].extend(
-                self._map_organizations(user)
+            records["organization"].extend(
+                self._map_organization(user)
             )
 
-            records["received_events"].extend(
-                self._map_received_events(user)
+            records["received_event"].extend(
+                self._map_received_event(user)
             )
 
             records["starred"].extend(
                 self._map_starred(user)
             )
 
-            records["user_repositories"].extend(
-                self._map_repositories(user)
+            records["user_repository"].extend(
+                self._map_repository(user)
             )
 
         return records
@@ -128,10 +128,11 @@ class UserMapper:
         }
 
     @staticmethod
-    def _map_events(user: UserItem) -> list[Record]:
+    def _map_event(user: UserItem) -> list[Record]:
         """Map the user's public events."""
         return [
-            {
+            {   
+                # "user_id": user.id,
                 "id": event.id,
                 "type": event.type,
                 "actor_id": event.actor_id,
@@ -145,10 +146,11 @@ class UserMapper:
         ]
 
     @staticmethod
-    def _map_followers(user: UserItem) -> list[Record]:
+    def _map_follower(user: UserItem) -> list[Record]:
         """Map users following this user."""
         return [
-            {
+            {   
+                "user_id": user.id,
                 "login": follower.login,
                 "id": follower.id,
                 "node_id": follower.node_id,
@@ -175,7 +177,8 @@ class UserMapper:
     def _map_following(user: UserItem) -> list[Record]:
         """Map users followed by this user."""
         return [
-            {
+            {   
+                "user_id": user.id,
                 "login": following.login,
                 "id": following.id,
                 "node_id": following.node_id,
@@ -199,10 +202,11 @@ class UserMapper:
         ]
 
     @staticmethod
-    def _map_gists(user: UserItem) -> list[Record]:
+    def _map_gist(user: UserItem) -> list[Record]:
         """Map gists created by the user."""
         return [
-            {
+            {   
+                # "user_id": user.id,
                 "id": gist.id,
                 "node_id": gist.node_id,
                 "url": gist.url,
@@ -225,10 +229,11 @@ class UserMapper:
         ]
 
     @staticmethod
-    def _map_organizations(user: UserItem) -> list[Record]:
+    def _map_organization(user: UserItem) -> list[Record]:
         """Map organizations associated with the user."""
         return [
-            {
+            {   
+                # "user_id": user.id,
                 "login": organization.login,
                 "id": organization.id,
                 "node_id": organization.node_id,
@@ -248,7 +253,8 @@ class UserMapper:
         profile = user.profile
 
         return [
-            {
+            {   
+                # "user_id": user.id,
                 "login": profile.login,
                 "id": profile.id,
                 "node_id": profile.node_id,
@@ -285,10 +291,11 @@ class UserMapper:
         ]
 
     @staticmethod
-    def _map_received_events(user: UserItem) -> list[Record]:
+    def _map_received_event(user: UserItem) -> list[Record]:
         """Map events received by the user."""
         return [
-            {
+            {   
+                "user_id": user.id,
                 "id": received_event.id,
                 "type": received_event.type,
                 "actor_id": received_event.actor_id,
@@ -306,7 +313,8 @@ class UserMapper:
     def _map_starred(user: UserItem) -> list[Record]:
         """Map repositories starred by the user."""
         return [
-            {
+            {   
+                "user_id": user.id,
                 "id": starred.id,
                 "node_id": starred.node_id,
                 "name": starred.name,
@@ -322,10 +330,11 @@ class UserMapper:
         ]
 
     @staticmethod
-    def _map_repositories(user: UserItem) -> list[Record]:
+    def _map_repository(user: UserItem) -> list[Record]:
         """Map repositories associated with the user."""
         return [
-            {
+            {   
+                "user_id": user.id,
                 "id": repository.id,
                 "node_id": repository.node_id,
                 "name": repository.name,

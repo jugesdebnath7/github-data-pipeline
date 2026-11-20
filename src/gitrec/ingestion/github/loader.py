@@ -50,17 +50,11 @@ class ResourceLoader:
         """
         self._client = client
 
-    def _safe_get(self, endpoint: str) -> JSON:
-        """
-        Execute a GitHub API request.
-
-        Args:
-            endpoint:
-                GitHub API endpoint.
-
-        Returns:
-            Parsed API response or an error payload.
-        """
+    def _safe_get(
+        self,
+        endpoint: str,
+        default: JSON | None = None,
+    ) -> JSON:
         try:
             return self._client.get(endpoint)
 
@@ -77,28 +71,38 @@ class ResourceLoader:
                 exc,
             )
 
-            return {
-                "success": False,
-                "error": str(exc),
-                "endpoint": endpoint,
-            }
+            if default is not None:
+                return default
+
+            raise
 
     def load_resources(
         self,
         endpoints: dict[str, str | None],
     ) -> LoaderResult:
-        """
-        Load multiple GitHub resources.
 
-        Args:
-            endpoints:
-                Mapping of resource names to GitHub API endpoints.
-
-        Returns:
-            Loaded resources keyed by resource name.
-        """
         return {
-            name: self._safe_get(endpoint)
+            name: self._safe_get(
+                endpoint,
+                default=[] if name in {
+                    "contributors",
+                    "commits",
+                    "releases",
+                    "branches",
+                    "tags",
+                    "issues",
+                    "pulls_request",
+                    "forks",
+                    "user_repositories",
+                    "starred",
+                    "followers",
+                    "following",
+                    "organizations",
+                    "gists",
+                    "events",
+                    "received_events",
+                } else None,
+            )
             for name, endpoint in endpoints.items()
             if endpoint is not None
         }
@@ -147,7 +151,7 @@ class RepositoryLoader:
                 "branches": repo_endpoint.branches,
                 "tags": repo_endpoint.tags,
                 "issues": repo_endpoint.issues,
-                "pulls_request": repo_endpoint.pulls,
+                "pulls_requests": repo_endpoint.pulls,
                 "forks": repo_endpoint.forks,
                 "readme": repo_endpoint.readme,
             }

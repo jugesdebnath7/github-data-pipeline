@@ -13,7 +13,7 @@ from src.gitrec.ingestion.github.loader import (
 from src.gitrec.ingestion.github.search import GitHubSearch 
 from src.gitrec.ingestion.service import IngestionService
 from src.gitrec.persistence.postgres.connection import PostgresConnection
-from src.gitrec.persistence.service import PersistenceService
+from src.gitrec.persistence.postgres.staging.staging_persistence import StagingPersistence
 
 
 logger = logging.getLogger(__name__)
@@ -70,16 +70,16 @@ def main() -> None:
     logger.info("Starting PostgreSQL persistence")
 
     with PostgresConnection(settings=settings) as postgres_connection:
-        persistence_service = PersistenceService(
+        staging_persistence = StagingPersistence(
             connection=postgres_connection,
         )
 
-        persistence_service.persist(
+        staging_persistence.persist(
             repositories=result.repositories,
             users=result.users,
         )
 
-    logger.info("PostgreSQL persistence completed successfully")
+    logger.info("PostgreSQL staging persistence completed successfully")
 
 
 if __name__ == "__main__":

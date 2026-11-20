@@ -1,4 +1,4 @@
-# src/gitrec/persistence/postgres/writer/base_writer.py
+# src/gitrec/persistence/postgres/writer/staging/staging_base.py
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ from sqlalchemy.engine import Connection
 Record = dict[str, Any]
 
 
-class BaseWriter:
+class StagingBaseWriter:
     """Provide common PostgreSQL persistence operations."""
 
     def __init__(

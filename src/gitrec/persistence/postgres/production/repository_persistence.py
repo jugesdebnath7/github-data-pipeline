@@ -1,4 +1,4 @@
-# src/gitrec/persistence/postgres/writer/repository_writer.py
+# src/gitrec/persistence/postgres/production/production_repository.py
 
 
 from __future__ import annotations
@@ -7,24 +7,26 @@ from typing import Any
 
 from sqlalchemy.engine import Connection
 
-from src.gitrec.persistence.postgres.writer.base_writer import BaseWriter
+from src.gitrec.persistence.postgres.production.base_persistence import (
+    ProductionBasePersistence,
+)
 
 
 Record = dict[str, Any]
 Records = dict[str, list[Record]]
 
 
-class RepositoryWriter(BaseWriter):
-    """Persist repository-related records to PostgreSQL."""
+class ProductionRepositoryPersistence(ProductionBasePersistence):
+    """Persist normalized repository records to PostgreSQL."""
 
     def __init__(self, connection: Connection) -> None:
         super().__init__(
             connection=connection,
-            schema="staging_repository",
+            schema="production_repository",
         )
 
     def write(self, records: Records) -> None:
-        """Persist all repository resources."""
+        """Persist all transformed repository resources."""
 
         self._write_repositories(records["repositories"])
         self._write_branches(records["branches"])
@@ -34,7 +36,7 @@ class RepositoryWriter(BaseWriter):
         self._write_issues(records["issues"])
         self._write_languages(records["languages"])
         self._write_pull_requests(records["pull_requests"])
-        self._write_readme(records["readme"])
+        self._write_readmes(records["readmes"])
         self._write_releases(records["releases"])
         self._write_tags(records["tags"])
         self._write_topics(records["topics"])
@@ -63,7 +65,7 @@ class RepositoryWriter(BaseWriter):
     def _write_pull_requests(self, records: list[Record]) -> None:
         self._insert("pull_request", records)
 
-    def _write_readme(self, records: list[Record]) -> None:
+    def _write_readmes(self, records: list[Record]) -> None:
         self._insert("readme", records)
 
     def _write_releases(self, records: list[Record]) -> None:

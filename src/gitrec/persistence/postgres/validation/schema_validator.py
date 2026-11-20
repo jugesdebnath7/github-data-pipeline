@@ -34,35 +34,40 @@ class SchemaValidator:
 
     SCHEMAS = {
         "repository": {
-            "repositories": "repository",
-            "branches": "branch",
-            "commits": "commit",
-            "contributors": "contributor",
-            "forks": "fork",
-            "issues": "issue",
-            "languages": "language",
-            "pull_requests": "pull_request",
+            "repository": "repository",
+            "branch": "branch",
+            "commit": "commit",
+            "contributor": "contributor",
+            "fork": "fork",
+            "issue": "issue",
+            "language": "language",
+            "pull_request": "pull_request",
             "readme": "readme",
-            "releases": "release",
-            "tags": "tag",
-            "topics": "topic",
+            "release": "release",
+            "tag": "tag",
+            "topic": "topic",
         },
         "user": {
-            "users": "user",
-            "profiles": "profile",
-            "events": "event",
-            "followers": "follower",
+            "user": "user",
+            "profile": "profile",
+            "event": "event",
+            "follower": "follower",
             "following": "following",
-            "gists": "gist",
-            "organizations": "organization",
-            "received_events": "received_event",
+            "gist": "gist",
+            "organization": "organization",
+            "received_event": "received_event",
             "starred": "starred",
-            "user_repositories": "repository",
+            "user_repository": "repository",
         },
     }
 
-    def __init__(self, engine: Engine) -> None:
+    def __init__(
+        self, 
+        engine: Engine, 
+        schema_prefix: str = "",
+    ) -> None:
         self._engine = engine
+        self._schema_prefix = schema_prefix
         self._metadata = MetaData()
         self._tables: dict[tuple[str, str], Table] = {}
 
@@ -90,7 +95,7 @@ class SchemaValidator:
             resource_records = records.get(resource_name, [])
 
             self._validate_resource(
-                schema=f"staging_{resource}",
+                schema=f"{self._schema_prefix}_{resource}",
                 table_name=table_name,
                 records=resource_records,
             )
@@ -197,7 +202,7 @@ class SchemaValidator:
     ) -> None:
         """Validate Python values against SQLAlchemy column types."""
 
-        column_type = column.type
+        column_type = column.type 
         valid = True
 
         if isinstance(column_type, Boolean):
