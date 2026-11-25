@@ -1,6 +1,5 @@
 # src/gitrec/persistence/postgres/production/production_repository.py
 
-
 from __future__ import annotations
 
 from typing import Any
@@ -13,7 +12,8 @@ from src.gitrec.persistence.postgres.production.base_persistence import (
 
 
 Record = dict[str, Any]
-Records = dict[str, list[Record]]
+ClassifiedRecords = dict[str, list[Record]]
+Records = dict[str, ClassifiedRecords]
 
 
 class ProductionRepositoryPersistence(ProductionBasePersistence):
@@ -28,51 +28,63 @@ class ProductionRepositoryPersistence(ProductionBasePersistence):
     def write(self, records: Records) -> None:
         """Persist all transformed repository resources."""
 
-        self._write_repositories(records["repositories"])
-        self._write_branches(records["branches"])
-        self._write_commits(records["commits"])
-        self._write_contributors(records["contributors"])
-        self._write_forks(records["forks"])
-        self._write_issues(records["issues"])
-        self._write_languages(records["languages"])
-        self._write_pull_requests(records["pull_requests"])
-        self._write_readmes(records["readmes"])
-        self._write_releases(records["releases"])
-        self._write_tags(records["tags"])
-        self._write_topics(records["topics"])
+        self._write_repository(records["repository"])
+        self._write_branch(records["branch"])
+        self._write_commit(records["commit"])
+        self._write_contributor(records["contributor"])
+        self._write_fork(records["fork"])
+        self._write_issue(records["issue"])
+        self._write_language(records["language"])
+        self._write_pull_request(records["pull_request"])
+        self._write_readme(records["readme"])
+        self._write_release(records["release"])
+        self._write_tag(records["tag"])
+        self._write_topic(records["topic"])
 
-    def _write_repositories(self, records: list[Record]) -> None:
-        self._insert("repository", records)
+    @staticmethod
+    def _flatten_records(records: ClassifiedRecords) -> list[Record]:
+        """Flatten classified records into a single list."""
 
-    def _write_branches(self, records: list[Record]) -> None:
-        self._insert("branch", records)
+        return [
+            record
+            for category_records in records.values()
+            for record in category_records
+        ]
 
-    def _write_commits(self, records: list[Record]) -> None:
-        self._insert("commit", records)
+    def _write_repository(self, records: ClassifiedRecords) -> None:
+        self._insert("repository", self._flatten_records(records))
 
-    def _write_contributors(self, records: list[Record]) -> None:
-        self._insert("contributor", records)
+    def _write_branch(self, records: ClassifiedRecords) -> None:
+        self._insert("branch", self._flatten_records(records))
 
-    def _write_forks(self, records: list[Record]) -> None:
-        self._insert("fork", records)
+    def _write_commit(self, records: ClassifiedRecords) -> None:
+        self._insert("commit", self._flatten_records(records))
 
-    def _write_issues(self, records: list[Record]) -> None:
-        self._insert("issue", records)
+    def _write_contributor(self, records: ClassifiedRecords) -> None:
+        self._insert("contributor", self._flatten_records(records))
 
-    def _write_languages(self, records: list[Record]) -> None:
-        self._insert("language", records)
+    def _write_fork(self, records: ClassifiedRecords) -> None:
+        self._insert("fork", self._flatten_records(records))
 
-    def _write_pull_requests(self, records: list[Record]) -> None:
-        self._insert("pull_request", records)
+    def _write_issue(self, records: ClassifiedRecords) -> None:
+        self._insert("issue", self._flatten_records(records))
 
-    def _write_readmes(self, records: list[Record]) -> None:
-        self._insert("readme", records)
+    def _write_language(self, records: ClassifiedRecords) -> None:
+        self._insert("language", self._flatten_records(records))
 
-    def _write_releases(self, records: list[Record]) -> None:
-        self._insert("release", records)
+    def _write_pull_request(self, records: ClassifiedRecords) -> None:
+        self._insert("pull_request", self._flatten_records(records))
 
-    def _write_tags(self, records: list[Record]) -> None:
-        self._insert("tag", records)
+    def _write_readme(self, records: ClassifiedRecords) -> None:
+        self._insert("readme", self._flatten_records(records))
 
-    def _write_topics(self, records: list[Record]) -> None:
-        self._insert("topic", records)
+    def _write_release(self, records: ClassifiedRecords) -> None:
+        self._insert("release", self._flatten_records(records))
+
+    def _write_tag(self, records: ClassifiedRecords) -> None:
+        self._insert("tag", self._flatten_records(records))
+
+    def _write_topic(self, records: ClassifiedRecords) -> None:
+        self._insert("topic", self._flatten_records(records))
+
+

@@ -13,7 +13,17 @@ Records = dict[str, list[dict[str, Any]]]
 
 
 class RequiredKeyValidator:
-    """Validate presence and non-null values of primary-key columns."""
+    """
+    Validates presence and non-null values of production primary keys in records.
+
+    Primary-key definations are obtained from the production constraints module.
+
+    Does not perform: 
+        - Duplicate detection
+        - Database existence checks
+        - Foreign key validation
+        - Data type validation
+    """
 
     def validate(
         self,
@@ -24,17 +34,30 @@ class RequiredKeyValidator:
         errors: list[str] = []
 
         for table_name, table_records in records.items():
+
             table_key = f"{schema}.{table_name}"
+
             primary_keys = PRIMARY_KEYS.get(table_key)
 
             if not primary_keys:
                 errors.append(
-                    f"{table_key}: No primary-key configuration found."
+                    f"{table_key}: Missing or empty "
+                    f"primary-key configuration."
                 )
                 continue
 
             for index, record in enumerate(table_records):
+
+                if not isinstance(record, dict):
+                    errors.append(
+                        f"{table_key}, record {index}: "
+                        f"Expected dictionary, received "
+                        f"{type(record).__name__}."
+                    )
+                    continue
+
                 for column in primary_keys:
+
                     if column not in record:
                         errors.append(
                             f"{table_key}, record {index}: "
@@ -44,7 +67,8 @@ class RequiredKeyValidator:
                     elif record[column] is None:
                         errors.append(
                             f"{table_key}, record {index}: "
-                            f"Primary-key column '{column}' cannot be NULL."
+                            f"Primary-key column '{column}' "
+                            f"cannot be NULL."
                         )
-                        
+
         return errors

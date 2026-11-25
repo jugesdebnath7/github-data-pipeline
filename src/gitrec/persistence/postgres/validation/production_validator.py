@@ -7,73 +7,96 @@ from typing import Any
 from src.gitrec.persistence.postgres.validation.required_key_validator import (
     RequiredKeyValidator,
 )
-from src.gitrec.persistence.postgres.validation.uniqueness_validator import (
-    UniquenessValidator,
-)
 
 
 Records = dict[str, list[dict[str, Any]]]
 
 
 class ProductionValidationError(ValueError):
-    """Raised when production records fail validation."""
+    """Raised when production records fail structural validation."""
 
     def __init__(
         self,
         errors: list[str],
     ) -> None:
-        super().__init__(
-            "Production records failed validation:\n"
-            + "\n".join(f"- {error}" for error in errors)
-        )
+
         self.errors = errors
 
-class ProductionValidator:        
-    """Cordinate validation of production records before insertion into the database."""
+        super().__init__(
+            "Production records failed validation:\n"
+            + "\n".join(
+                f"- {error}"
+                for error in errors
+            )
+        )
+
+
+class ProductionValidator:
+    """
+    Coordinate structural validation of production records.
+
+    Validates incoming records before idempotency checks
+    and database persistence.
+    """
 
     def __init__(self) -> None:
+
         self.required_key_validator = RequiredKeyValidator()
-        self.uniqueness_validator = UniquenessValidator()
+
+    def _collect_errors(
+        self,
+        records: Records,
+        schema: str,
+    ) -> list[str]:
+
+        return self.required_key_validator.validate(
+            records=records,
+            schema=schema,
+        )
 
     def validate(
         self,
         records: Records,
         schema: str,
     ) -> None:
-        """Validate production records."""
+        """Validate records belonging to one production schema."""
 
-        errors: list[str] = []
-
-        errors.extend(
-            self.required_key_validator.validate(
-                records=records,
-                schema=schema,
-            )
-        )
-
-        errors.extend(
-            self.uniqueness_validator.validate(
-                records=records,
-                schema=schema,
-            )
+        errors = self._collect_errors(
+            records=records,
+            schema=schema,
         )
 
         if errors:
-            raise ProductionValidationError(errors=errors)
+            raise ProductionValidationError(errors)
 
     def validate_all(
         self,
         repository_records: Records,
         user_records: Records,
     ) -> None:
-        """Validate all transformed production records."""
+        """Validate all incoming production records."""
 
-        self.validate(
-            repository_records,
-            "production_repository",
-        )
+        errors: list[str] = []
 
-        self.validate(
-            user_records,
-            "production_user",
-        )
+        schemas = [
+            (
+                "production_repository",
+                repository_records,
+            ),
+            (
+                "production_user",
+                user_records,
+            ),
+        ]
+
+        for schema, records in schemas:
+
+            errors.extend(
+                self._collect_errors(
+                    records=records,
+                    schema=schema,
+                )
+            )
+
+        if errors:
+            raise ProductionValidationError(errors)
