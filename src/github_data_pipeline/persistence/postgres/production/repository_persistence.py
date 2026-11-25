@@ -41,50 +41,40 @@ class ProductionRepositoryPersistence(ProductionBasePersistence):
         self._write_tag(records["tag"])
         self._write_topic(records["topic"])
 
-    @staticmethod
-    def _flatten_records(records: ClassifiedRecords) -> list[Record]:
-        """Flatten classified records into a single list."""
-
-        return [
-            record
-            for category_records in records.values()
-            for record in category_records
-        ]
-
-    def _write_repository(self, records: ClassifiedRecords) -> None:
-        self._insert("repository", self._flatten_records(records))
+    def _write_repository(self, records: list[Records]) -> None:
+        self._insert_new("repository",  records)
 
     def _write_branch(self, records: ClassifiedRecords) -> None:
-        self._insert("branch", self._flatten_records(records))
+        self._insert_new("branch",  records)
 
     def _write_commit(self, records: ClassifiedRecords) -> None:
-        self._insert("commit", self._flatten_records(records))
+        self._insert_new("commit",  records)
 
     def _write_contributor(self, records: ClassifiedRecords) -> None:
-        self._insert("contributor", self._flatten_records(records))
+        self._insert_new("contributor",  records)
 
     def _write_fork(self, records: ClassifiedRecords) -> None:
-        self._insert("fork", self._flatten_records(records))
+        self._insert_new("fork",  records)
 
     def _write_issue(self, records: ClassifiedRecords) -> None:
-        self._insert("issue", self._flatten_records(records))
+        self._insert_new("issue",  records)
 
     def _write_language(self, records: ClassifiedRecords) -> None:
-        self._insert("language", self._flatten_records(records))
+        self._insert_new("language",  records)
 
     def _write_pull_request(self, records: ClassifiedRecords) -> None:
-        self._insert("pull_request", self._flatten_records(records))
+        self._insert_new("pull_request",  records)
 
     def _write_readme(self, records: ClassifiedRecords) -> None:
-        self._insert("readme", self._flatten_records(records))
+        self._insert_new("readme",  records)
 
     def _write_release(self, records: ClassifiedRecords) -> None:
-        self._insert("release", self._flatten_records(records))
+        self._insert_new("release",  records)
 
     def _write_tag(self, records: ClassifiedRecords) -> None:
-        self._insert("tag", self._flatten_records(records))
+        self._insert_new("tag",  records)
 
     def _write_topic(self, records: ClassifiedRecords) -> None:
-        self._insert("topic", self._flatten_records(records))
+        self._insert_new("topic",  records)
 
 
