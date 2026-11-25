@@ -3,7 +3,7 @@
 from sqlalchemy import text
 
 from src.github_data_pipeline.config.settings import get_settings
-from src.github_data_pipeline.persistence.postgres.connection import PostgresConnection
+from src.github_data_pipeline.persistence.connection import PostgresConnection
 
 
 def check_tables() -> None:

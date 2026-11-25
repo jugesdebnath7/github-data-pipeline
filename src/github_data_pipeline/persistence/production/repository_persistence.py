@@ -6,7 +6,7 @@ from typing import Any
 
 from sqlalchemy.engine import Connection
 
-from src.github_data_pipeline.persistence.postgres.production.base_persistence import (
+from src.github_data_pipeline.persistence.production.base_persistence import (
     ProductionBasePersistence,
 )
 

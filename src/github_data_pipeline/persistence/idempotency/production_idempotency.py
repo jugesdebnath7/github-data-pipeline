@@ -1,4 +1,4 @@
-# src/github_data_pipeline/persistence/postgres/idempotency/production_idempotency.py
+# src/github_data_pipeline/persistence/idempotency/production_idempotency.py
 
 from __future__ import annotations
 
@@ -7,7 +7,7 @@ from typing import Any
 from sqlalchemy import MetaData, Table, select, tuple_
 from sqlalchemy.engine import Connection
 
-from src.github_data_pipeline.persistence.postgres.schema.production_constraints import (
+from src.github_data_pipeline.persistence.schema.production_constraints import (
     PRIMARY_KEYS,
 )
 

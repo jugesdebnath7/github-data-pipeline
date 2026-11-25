@@ -10,7 +10,7 @@ from typing import Sequence, Union
 from alembic import op
 import sqlalchemy as text
 
-from src.github_data_pipeline.persistence.postgres.schema.production_builder import (
+from src.github_data_pipeline.persistence.schema.production_builder import (
     ProductionSchemaBuilder,
 )
 

@@ -1,17 +1,17 @@
-# src/github_data_pipeline/persistence/service.py
+# src/github_data_pipeline/persistence/staging/service.py
 
 from __future__ import annotations
 
 from src.github_data_pipeline.domain.entity.repository.repository_item import RepositoryItem
 from src.github_data_pipeline.domain.entity.user.user_item import UserItem
-from src.github_data_pipeline.persistence.postgres.connection import PostgresConnection
-from src.github_data_pipeline.persistence.postgres.mapper.repository import RepositoryMapper
-from src.github_data_pipeline.persistence.postgres.mapper.user import UserMapper
-from src.github_data_pipeline.persistence.postgres.validation.schema_validator import (
+from src.github_data_pipeline.persistence.connection import PostgresConnection
+from src.github_data_pipeline.persistence.mapper.repository import RepositoryMapper
+from src.github_data_pipeline.persistence.mapper.user import UserMapper
+from src.github_data_pipeline.persistence.validation.schema_validator import (
     SchemaValidator,
 )
-from src.github_data_pipeline.persistence.postgres.staging.staging_repository import RepositoryWriter
-from src.github_data_pipeline.persistence.postgres.staging.staging_user import UserWriter
+from src.github_data_pipeline.persistence.staging.staging_repository import RepositoryWriter
+from src.github_data_pipeline.persistence.staging.staging_user import UserWriter
 
 
 class StagingPersistence:

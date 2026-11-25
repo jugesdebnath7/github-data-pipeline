@@ -1,5 +1,5 @@
 
-# src/github_data_pipeline/persistence/postgres/transformer/base_transformer.py
+# src/github_data_pipeline/persistence/transformer/base_transformer.py
 
 from __future__ import annotations
 
@@ -7,10 +7,10 @@ from typing import Any
 
 from sqlalchemy import Table
 
-from src.github_data_pipeline.persistence.postgres.schema.production_builder import (
+from src.github_data_pipeline.persistence.schema.production_builder import (
     ProductionSchemaBuilder,
 )
-from src.github_data_pipeline.persistence.postgres.schema.production_constraints import (
+from src.github_data_pipeline.persistence.schema.production_constraints import (
     COLUMN_RENAMES,
 )
 

@@ -1,4 +1,4 @@
-# src/github_data_pipeline/persistence/postgres/writer/staging/staging_base.py
+# src/github_data_pipeline/persistence/staging/staging_base.py
 
 from __future__ import annotations
 

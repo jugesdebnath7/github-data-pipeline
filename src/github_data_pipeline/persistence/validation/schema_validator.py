@@ -1,5 +1,5 @@
 
-# src/github_data_pipeline/persistence/postgres/validation/schema_validator.py
+# src/github_data_pipeline/persistence/validation/schema_validator.py
 
 from __future__ import annotations
 

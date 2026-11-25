@@ -52,25 +52,6 @@ class GitHubSettings(BaseModel):
     def token_value(self) -> Optional[str]:
         return self.token.get_secret_value() if self.token else None
 
-
-class TrainingSettings(BaseModel):
-    model_path: Path = Field(default=Path("artifacts/models/"))
-    embedding_dim: int = Field(default=64, gt=0)
-    batch_size: int = Field(default=128, gt=0)
-
-    @field_validator("model_path")
-    @classmethod
-    def validate_model_path(cls, v: Path) -> Path:
-        v = v.expanduser().resolve(strict=False)
-
-        # Create if missing (ML-friendly behaviour)
-        v.mkdir(parents=True, exist_ok=True)
-
-        if not v.is_dir():
-            raise ValueError(f"{v} is not a directory")
-
-        return v
-
     
 # -----------------------------
 # MAIN SETTINGS
@@ -86,9 +67,6 @@ class Settings(BaseSettings):
 
     # Environment
     env: Literal["development", "staging", "production"] = "development"
-
-    # Training 
-    training: TrainingSettings = Field(default_factory=TrainingSettings)
 
     # Nested configs
     postgres: DatabaseSettings = Field(...)

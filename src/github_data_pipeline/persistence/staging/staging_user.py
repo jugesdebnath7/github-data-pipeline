@@ -1,5 +1,4 @@
-# src/github_data_pipeline/persistence/postgres/production/user_persistence.py
-
+# src/github_data_pipeline/persistence/user_writer.py
 
 from __future__ import annotations
 
@@ -7,26 +6,24 @@ from typing import Any
 
 from sqlalchemy.engine import Connection
 
-from src.github_data_pipeline.persistence.postgres.production.base_persistence import (
-    ProductionBasePersistence,
-)
+from src.github_data_pipeline.persistence.staging.staging_base import StagingBaseWriter
 
 
 Record = dict[str, Any]
 Records = dict[str, list[Record]]
 
 
-class ProductionUserPersistence(ProductionBasePersistence):
-    """Persist normalized user records to PostgreSQL."""
+class UserWriter(StagingBaseWriter):
+    """Persist user-related records to PostgreSQL."""
 
     def __init__(self, connection: Connection) -> None:
         super().__init__(
             connection=connection,
-            schema="production_user",
+            schema="staging_user",
         )
 
     def write(self, records: Records) -> None:
-        """Persist all transformed user resources."""
+        """Persist all user resources."""
 
         self._write_user(records["user"])
         self._write_profile(records["profile"])
@@ -40,31 +37,31 @@ class ProductionUserPersistence(ProductionBasePersistence):
         self._write_repository(records["user_repository"])
 
     def _write_user(self, records: list[Record]) -> None:
-        self._insert_new("user", records)
+        self._insert("user", records)
 
     def _write_profile(self, records: list[Record]) -> None:
-        self._insert_new("profile", records)
+        self._insert("profile", records)
 
     def _write_event(self, records: list[Record]) -> None:
-        self._insert_new("event", records)
+        self._insert("event", records)
 
     def _write_follower(self, records: list[Record]) -> None:
-        self._insert_new("follower", records)
+        self._insert("follower", records)
 
     def _write_following(self, records: list[Record]) -> None:
-        self._insert_new("following", records)
+        self._insert("following", records)
 
     def _write_gist(self, records: list[Record]) -> None:
-        self._insert_new("gist", records)
+        self._insert("gist", records)
 
     def _write_organization(self, records: list[Record]) -> None:
-        self._insert_new("organization", records)
+        self._insert("organization", records)
 
     def _write_received_event(self, records: list[Record]) -> None:
-        self._insert_new("received_event", records)
+        self._insert("received_event", records)
 
     def _write_starred(self, records: list[Record]) -> None:
-        self._insert_new("starred", records)
+        self._insert("starred", records)
 
     def _write_repository(self, records: list[Record]) -> None:
-        self._insert_new("repository", records)
+        self._insert("repository", records)

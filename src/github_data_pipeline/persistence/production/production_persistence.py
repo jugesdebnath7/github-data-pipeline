@@ -2,38 +2,38 @@
 
 from __future__ import annotations
 
-from src.github_data_pipeline.persistence.postgres.connection import PostgresConnection
+from src.github_data_pipeline.persistence.connection import PostgresConnection
 
-from src.github_data_pipeline.persistence.postgres.reader.repository_reader import (
+from src.github_data_pipeline.persistence.reader.repository_reader import (
     RepositoryReader,
 )
-from src.github_data_pipeline.persistence.postgres.reader.user_reader import (
+from src.github_data_pipeline.persistence.reader.user_reader import (
     UserReader,
 )
 
-from src.github_data_pipeline.persistence.postgres.schema.production_builder import (
+from src.github_data_pipeline.persistence.schema.production_builder import (
     ProductionSchemaBuilder,
 )
 
-from src.github_data_pipeline.persistence.postgres.transformer.repository_transformer import (
+from src.github_data_pipeline.persistence.transformer.repository_transformer import (
     RepositoryTransformer,
 )
-from src.github_data_pipeline.persistence.postgres.transformer.user_transformer import (
+from src.github_data_pipeline.persistence.transformer.user_transformer import (
     UserTransformer,
 )
 
-from src.github_data_pipeline.persistence.postgres.validation.production_validator import (
+from src.github_data_pipeline.persistence.validation.production_validator import (
     ProductionValidator,
 )
 
-from src.github_data_pipeline.persistence.postgres.idempotency.production_idempotency import (
+from src.github_data_pipeline.persistence.idempotency.production_idempotency import (
     ProductionIdempotency,
 )
 
-from src.github_data_pipeline.persistence.postgres.production.repository_persistence import (
+from src.github_data_pipeline.persistence.production.repository_persistence import (
     ProductionRepositoryPersistence,
 )
-from src.github_data_pipeline.persistence.postgres.production.user_persistence import (
+from src.github_data_pipeline.persistence.production.user_persistence import (
     ProductionUserPersistence,
 )
 

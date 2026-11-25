@@ -1,10 +1,10 @@
-# src/github_data_pipeline/persistence/postgres/validation/production_validator.py
+# src/github_data_pipeline/persistence/validation/production_validator.py
 
 from __future__ import annotations
 
 from typing import Any
 
-from src.github_data_pipeline.persistence.postgres.validation.required_key_validator import (
+from src.github_data_pipeline.persistence.validation.required_key_validator import (
     RequiredKeyValidator,
 )
 

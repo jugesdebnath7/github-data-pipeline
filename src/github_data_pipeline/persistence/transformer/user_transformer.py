@@ -1,14 +1,14 @@
-# src/github_data_pipeline/persistence/postgres/transformer/user_transformer.py
+# src/github_data_pipeline/persistence/transformer/user_transformer.py
 
 from __future__ import annotations
 
 from typing import Any
 
-from src.github_data_pipeline.persistence.postgres.transformer.base_transformer import (
+from src.github_data_pipeline.persistence.transformer.base_transformer import (
     BaseTransformer,
     Records,
 )
-from src.github_data_pipeline.persistence.postgres.schema.production_builder import (
+from src.github_data_pipeline.persistence.schema.production_builder import (
     ProductionSchemaBuilder,
 )
 

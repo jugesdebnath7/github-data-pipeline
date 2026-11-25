@@ -1,4 +1,4 @@
-# src/github_data_pipeline/persistence/postgres/writer/repository_writer.py
+# src/github_data_pipeline/persistence/repository_writer.py
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ from typing import Any
 
 from sqlalchemy.engine import Connection
 
-from src.github_data_pipeline.persistence.postgres.staging.staging_base import StagingBaseWriter
+from src.github_data_pipeline.persistence.staging.staging_base import StagingBaseWriter
 
 
 Record = dict[str, Any]
