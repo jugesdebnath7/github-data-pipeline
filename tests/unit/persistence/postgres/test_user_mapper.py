@@ -5,8 +5,8 @@
 
 # import pytest
 
-# from src.gitrec.domain.entity.user.user_item import UserItem
-# from src.gitrec.persistence.postgres.mapper.user import UserMapper
+# from github_data_pipeline.domain.entity.user.user_item import UserItem
+# from github_data_pipeline.persistence.postgres.mapper.user import UserMapper
 
 
 # @pytest.fixture
@@ -106,7 +106,7 @@
 
 
 
-# from src.gitrec.domain.entity.user.event_item import EventItem
+# from github_data_pipeline.domain.entity.user.event_item import EventItem
 
 
 # @pytest.fixture

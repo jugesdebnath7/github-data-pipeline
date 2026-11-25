@@ -1,4 +1,4 @@
--- src/gitrec/persistence/postgres/sql/staging_tables.sql
+-- src/github_data_pipeline/persistence/postgres/sql/staging_tables.sql
 
 -- ===============================================
 -- staging_user.follower

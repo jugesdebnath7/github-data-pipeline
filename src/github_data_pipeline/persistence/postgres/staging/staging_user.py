@@ -1,4 +1,4 @@
-# src/gitrec/persistence/postgres/writer/user_writer.py
+# src/github_data_pipeline/persistence/postgres/writer/user_writer.py
 
 from __future__ import annotations
 

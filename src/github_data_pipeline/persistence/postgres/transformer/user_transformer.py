@@ -1,4 +1,4 @@
-# src/gitrec/persistence/postgres/transformer/user_transformer.py
+# src/github_data_pipeline/persistence/postgres/transformer/user_transformer.py
 
 from __future__ import annotations
 

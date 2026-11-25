@@ -1,4 +1,4 @@
-# src/gitrec/persistence/postgres/validation/production_validator.py
+# src/github_data_pipeline/persistence/postgres/validation/production_validator.py
 
 from __future__ import annotations
 

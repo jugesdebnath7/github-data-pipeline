@@ -1,4 +1,4 @@
-# src/gitrec/ingestion/github/rate_limiter.py
+# src/github_data_pipeline/ingestion/github/rate_limiter.py
 
 
 

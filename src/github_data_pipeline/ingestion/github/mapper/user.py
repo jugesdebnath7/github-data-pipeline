@@ -1,4 +1,4 @@
-# src/gitrec/ingestion/github/mapper/users.py
+# src/github_data_pipeline/ingestion/github/mapper/users.py
 
 from __future__ import annotations
 

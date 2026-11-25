@@ -1,4 +1,4 @@
-# src/gitrec/persistence/postgres/reader/repository.py
+# src/github_data_pipeline/persistence/postgres/reader/repository.py
 
 from __future__ import annotations
 

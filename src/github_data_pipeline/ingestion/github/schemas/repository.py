@@ -1,4 +1,4 @@
-# src/gitrec/ingestion/github/schemas/repository.py
+# src/github_data_pipeline/ingestion/github/schemas/repository.py
 
 from __future__ import annotations
 

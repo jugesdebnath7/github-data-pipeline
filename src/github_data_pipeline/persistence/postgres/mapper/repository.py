@@ -1,4 +1,4 @@
-# scr/gitrec/persistence/postgres/mapper/repository.py
+# src/github_data_pipeline/persistence/postgres/mapper/repository.py
 
 """Map repository aggregates into database-ready records."""
 

@@ -24,7 +24,7 @@ def upgrade() -> None:
     schema_file = (
         Path(__file__).resolve().parents[2] 
         / "src"
-        / "gitrec"
+        / "github_data_pipeline"
         / "persistence"
         / "postgres"
         / "sql"

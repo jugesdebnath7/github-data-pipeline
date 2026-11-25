@@ -1,4 +1,4 @@
-# src/gitrec/domain/mapper/user/user_repository_mapper.py
+# src/github_data_pipeline/domain/mapper/user/user_repository_mapper.py
 
 from __future__ import annotations
 

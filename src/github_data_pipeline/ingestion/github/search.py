@@ -1,4 +1,4 @@
-# src/gitrec/ingestion/github/search.py
+# src/github_data_pipeline/ingestion/github/search.py
 
 """
 GitHub REST API search operations.

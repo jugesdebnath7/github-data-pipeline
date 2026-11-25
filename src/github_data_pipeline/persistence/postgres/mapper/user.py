@@ -1,4 +1,4 @@
-# scr/gitrec/persistence/postgres/mapper/user.py
+# src/github_data_pipeline/persistence/postgres/mapper/user.py
 
 """Map user domain aggregates to database-ready records.
 

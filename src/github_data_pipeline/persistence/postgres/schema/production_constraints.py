@@ -1,5 +1,5 @@
 
-# src/gitrec/persistence/postgres/schema/production_constraints.py
+# src/github_data_pipeline/persistence/postgres/schema/production_constraints.py
 
 from sqlalchemy import BigInteger
 

@@ -1,4 +1,4 @@
-# src/gitrec/persistence/postgres/schema/production_builder.py
+# src/github_data_pipeline/persistence/postgres/schema/production_builder.py
 
 from __future__ import annotations
 

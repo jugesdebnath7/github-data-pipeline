@@ -1,4 +1,4 @@
-# src/gitrec/persistence/postgres/reader/user_reader.py
+# src/github_data_pipeline/persistence/postgres/reader/user_reader.py
 
 from __future__ import annotations
 

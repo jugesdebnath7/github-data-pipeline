@@ -1,4 +1,4 @@
-# src/gitrec/persistence/postgres/idempotency/production_idempotency.py
+# src/github_data_pipeline/persistence/postgres/idempotency/production_idempotency.py
 
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-# src/gitrec/persistence/service.py
+# src/github_data_pipeline/persistence/service.py
 
 from __future__ import annotations
 

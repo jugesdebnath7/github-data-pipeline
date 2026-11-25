@@ -1,4 +1,4 @@
-# src/gitrec/persistence/postgres/connection.py
+# src/github_data_pipeline/persistence/postgres/connection.py
 
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-# src/gitrec/ingestion/github/loader.py
+# src/github_data_pipeline/ingestion/github/loader.py
 
 """
 GitHub resource loading.

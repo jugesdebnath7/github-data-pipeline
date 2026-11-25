@@ -37,7 +37,7 @@ class DatabaseSettings(BaseModel):
 class HTTPSettings(BaseModel):
     timeout: int = Field(default=10, ge=1, le=60)
     retries: int = Field(default=3, ge=0, le=10)
-    user_agent: str = "gitrec-app"
+    user_agent: str = "github-data-pipeline"
 
 
 # ------------------------------

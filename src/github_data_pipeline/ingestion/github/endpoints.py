@@ -1,4 +1,4 @@
-# src/gitrec/ingestion/github/endpoints.py
+# src/github_data_pipeline/ingestion/github/endpoints.py
 
 """
 GitHub REST API endpoint builders.

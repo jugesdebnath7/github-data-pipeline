@@ -8,7 +8,7 @@ import argparse
 # CONFIG
 # ----------------------------
 
-PROJECT_NAME = "gitrec"
+PROJECT_NAME = "github-data-pipeline"
 
 STRUCTURE = {
     "src": {

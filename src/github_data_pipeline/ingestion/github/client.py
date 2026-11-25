@@ -1,4 +1,4 @@
-# src/gitrec/ingestion/github/client.py
+# src/github_data_pipeline/ingestion/github/client.py
 
 import logging
 from types import TracebackType

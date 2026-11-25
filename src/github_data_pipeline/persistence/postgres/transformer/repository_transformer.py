@@ -1,5 +1,5 @@
 
-# src/gitrec/persistence/postgres/transformer/repository_transformer.py
+# src/github_data_pipeline/persistence/postgres/transformer/repository_transformer.py
 
 from __future__ import annotations
 
