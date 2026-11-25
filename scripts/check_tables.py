@@ -2,8 +2,8 @@
 
 from sqlalchemy import text
 
-from src.gitrec.config.settings import get_settings
-from src.gitrec.persistence.postgres.connection import PostgresConnection
+from src.github_data_pipeline.config.settings import get_settings
+from src.github_data_pipeline.persistence.postgres.connection import PostgresConnection
 
 
 def check_tables() -> None:

@@ -2,18 +2,18 @@
 
 import logging
 
-from src.gitrec.config.settings import get_settings
-from src.gitrec.ingestion.github.client import GitHubClient
-from src.gitrec.ingestion.github.loader import (
+from src.github_data_pipeline.config.settings import get_settings
+from src.github_data_pipeline.ingestion.github.client import GitHubClient
+from src.github_data_pipeline.ingestion.github.loader import (
     GitHubLoader,
     RepositoryLoader,
     ResourceLoader,
     UserLoader,
 )
-from src.gitrec.ingestion.github.search import GitHubSearch 
-from src.gitrec.ingestion.service import IngestionService
-from src.gitrec.persistence.postgres.connection import PostgresConnection
-from src.gitrec.persistence.postgres.staging.staging_persistence import StagingPersistence
+from src.github_data_pipeline.ingestion.github.search import GitHubSearch 
+from src.github_data_pipeline.ingestion.service import IngestionService
+from src.github_data_pipeline.persistence.postgres.connection import PostgresConnection
+from src.github_data_pipeline.persistence.postgres.staging.staging_persistence import StagingPersistence
 
 
 logger = logging.getLogger(__name__)

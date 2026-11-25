@@ -4,9 +4,9 @@ from __future__ import annotations
 
 import logging
 
-from src.gitrec.config.settings import get_settings
-from src.gitrec.persistence.postgres.connection import PostgresConnection
-from src.gitrec.persistence.postgres.production.production_persistence import (
+from src.github_data_pipeline.config.settings import get_settings
+from src.github_data_pipeline.persistence.postgres.connection import PostgresConnection
+from src.github_data_pipeline.persistence.postgres.production.production_persistence import (
     ProductionPersistence,
 )
 
